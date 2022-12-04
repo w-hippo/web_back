@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head
+	th:replace="common/head :: head_fragment(title = '株価詳細', scripts = ~{::script}, links = ~{::link})"></head>
+<body>
+	<h2>株価詳細</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>境界コード</th>
+				<th>年月日</th>
+				<th>基準価格</th>
+				<th>前日比(円)</th>
+				<th>純資産総額</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="stockPrice : ${stockPrices}" th:object="${stockPrice}">
+				<td th:text="*{associationCode}"></td>
+				<td class="center"
+					th:text="${#dates.format(stockPrice.recordDate, 'yyyy/MM/dd')}"></td>
+				<td class="center" th:text="*{basePrice}"></td>
+				<td class="center" th:text="*{diffPrice}"></td>
+				<td class="center" th:text="*{assetValue}"></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
